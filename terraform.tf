@@ -1,7 +1,7 @@
 provider "aws" {
   region = "us-east-1"
-  access_key = "AKIA4DPPPJ2USRGQBANW"
-  secret_key = "umENEmGhHm7iVWOy1lrfptTBceQtNLT5somOTBMb"
+  access_key = "AKI******" # Add your access_key
+  secret_key = "umENEm***************" # Add your secret key
 }
 
 resource "aws_security_group" "flask_api_sg" {
@@ -47,16 +47,8 @@ resource "aws_instance" "flask_api_instance" {
               sudo usermod -aG docker ubuntu
               sudo docker run -d -p 5000:5000 sid75747docker/flask-api:latest
               EOF
-
-  connection {
-    type        = "ssh"
-    user        = "ubuntu"
-    private_key = file("~/.ssh/your-keypair.pem")  # Set the path to your private key
-    host        = self.public_ip
-  }
 }
 
-# Output the public IP address of the EC2 instance
 output "public_ip" {
   value = aws_instance.flask_api_instance.public_ip
 }
